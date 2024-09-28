@@ -1,0 +1,135 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+}body {
+  min-height: 100vh;
+  background:#7c3042;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.Calculator {
+  width: 375px;
+  height: 500px;
+  border-radius: 12px;
+  background-color:#b25b6e;
+  overflow: hidden;
+}
+
+.screen {
+  width: 100%;
+  height: 150px;
+  border: none;
+  border-radius: 12px;
+  font-size: 2rem;
+  padding: 1rem;
+  color: #fff;
+  background:	#f9cdd4;
+  text-align: right;
+  pointer-events: none;
+}
+
+
+.Button {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 20px;
+
+}
+
+button {
+  flex: 0 0 22%;
+  margin: 5px ;
+  border: none;
+  width: 60px;
+  height: 52px;
+  font-size: 22px;
+  font-weight: 600;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.Hellobutton {
+  background-color: #7c3042;
+}
+
+
+.Byebutton {
+  background-color:  #7c3042;
+}
+
+.DELbutton {
+  background-color: #7c3042;
+}
+
+.ACbutton {
+  background-color: #7c3042;
+}
+
+.Sevenbutton {
+  background-color: 	#f9cdd4;
+}
+
+.Eightbutton {
+  background-color: 	#f9cdd4;
+}
+
+.Ninebutton {
+  background-color: 	#f9cdd4;
+}
+
+.Multiplybutton {
+  background-color: #eca1ac;
+}
+
+.Fourbutton {
+  background-color: #f9cdd4;
+}
+
+.Fivebutton {
+  background-color: #f9cdd4;
+}
+
+.Sixbutton {
+  background-color: #f9cdd4;
+}
+
+.Subtractbutton {
+  background-color: #eca1ac;
+}
+
+.Threebutton {
+  background-color: #f9cdd4;
+}
+
+.Twobutton {
+  background-color: #f9cdd4;
+}
+
+.Onebutton {
+  background-color: #f9cdd4;
+}
+
+.Addbutton {
+  background-color: #eca1ac;
+}
+
+.Zerobutton {
+  background-color: #f9cdd4;
+}
+
+.Periodbutton {
+  background-color: #f9cdd4;
+}
+
+.Equalbutton {
+  background-color: #f9cdd4;
+}
+
+.Dividebutton {
+  background-color: #eca1ac;
+}
