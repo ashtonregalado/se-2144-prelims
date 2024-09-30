@@ -54,10 +54,10 @@ EqualButton.disabled = true;
 
 
 const HandleInputLimit = () => {
-    if (expression.length > 15) {
-        expression = expression.slice(0, 15);
+    if (expression.length > 16) {
+        expression = expression.slice(0, 16);
     }
-    CalculatorScreen.value = expression;
+    CalculatorScreen.value = expression
 };
 
 
@@ -82,9 +82,7 @@ DelButton.addEventListener("click", (event) => {
 
     if (["+", "-", "×", "÷"].includes(lastChar)) {
         last_button_was_operator = false; 
-    }
-
-    first_button_is_operator = false;
+    };
 
     current_input = current_input.slice(0, -1); 
     expression = expression.slice(0, -1);       
@@ -98,10 +96,16 @@ DelButton.addEventListener("click", (event) => {
 
             if (inputted_numbers[lastInputIndex] === "") {
                 inputted_numbers.pop();
-            }
-        }
-    }
+            };
+        };
+    };
 
+    if (expression === "") {
+        first_button_is_operator = false;
+    } else {
+        first_button_is_operator = true;
+    };
+    
     HandleInputLimit();
 });
 
@@ -110,6 +114,7 @@ AcButton.addEventListener("click", (event) => {
     AllButtons.forEach(button => {
         button.disabled = false;
     })
+    
     current_input = "";
     answer = 0;
     expression = "";
@@ -120,15 +125,15 @@ AcButton.addEventListener("click", (event) => {
 });
 
 const HandleNumberButtons = (num) => {
-    if (expression.length >=15) return;
+    if (expression.length >=16) return;
 
     if (expression === String(answer)) {
         expression = "";
-    }
+    };
 
     if (answer === parseFloat(inputted_numbers[0]) && inputted_numbers.length === 1) {
         inputted_numbers.splice(0,1);
-    }
+    };
 
 
     current_input += num;
@@ -145,9 +150,10 @@ const HandleNumberButtons = (num) => {
 
 
 PeriodButton.addEventListener("click", (event) => {
-    if (expression.length >=15) return;
+    if (expression.length >=16) return;
 
     last_button_was_operator = true;
+
     if (!current_input.includes(".")) {
         current_input += ".";
         expression += ".";
@@ -161,7 +167,7 @@ PeriodButton.addEventListener("click", (event) => {
 
 MultiplyButton.addEventListener("click", (event) => {
     let signs = ["×", "÷", "+", "-"]
-    if (expression.length >=15) return;
+    if (expression.length >=16) return;
 
     if (last_button_was_operator) return;
 
@@ -173,7 +179,7 @@ MultiplyButton.addEventListener("click", (event) => {
         } 
     } else {
         inputted_numbers.push(current_input);
-    }
+    };
 
     expression += "×" ;
     inputted_numbers.push("×");
@@ -188,7 +194,7 @@ MultiplyButton.addEventListener("click", (event) => {
 AddButton.addEventListener("click", (event) => {
     let signs = ["×", "÷", "+", "-"];
 
-    if (expression.length >=15) return;
+    if (expression.length >=16) return;
 
     if (last_button_was_operator) return;
 
@@ -200,8 +206,9 @@ AddButton.addEventListener("click", (event) => {
         } 
     } else {
         inputted_numbers.push(current_input);
-    }
+    };
 
+    PeriodButton.disabled = false
     expression += "+";
     inputted_numbers.push("+");
     current_input = "";
@@ -216,7 +223,7 @@ AddButton.addEventListener("click", (event) => {
 SubtractButton.addEventListener("click", (event) => {
     let signs = ["×", "÷", "+", "-"];
 
-    if (expression.length >=15) return;
+    if (expression.length >=16) return;
 
     if (last_button_was_operator) return;
 
@@ -226,7 +233,7 @@ SubtractButton.addEventListener("click", (event) => {
         } 
     } else {
         inputted_numbers.push(current_input);
-    }
+    };
     
     expression += "-";
     inputted_numbers.push("-");
@@ -241,7 +248,7 @@ SubtractButton.addEventListener("click", (event) => {
 DivideButton.addEventListener("click", (event) => {
     let signs = ["×", "÷", "+", "-"];
 
-    if (expression.length >=15) return;
+    if (expression.length >=16) return;
 
     if (last_button_was_operator) return;
 
@@ -250,11 +257,11 @@ DivideButton.addEventListener("click", (event) => {
     if (current_input === "") {
         if (signs.every((sign) => !expression.includes(sign))) {
 
-        } 
+        };
 
     } else {
         inputted_numbers.push(current_input);
-    }
+    };
     
     expression += "÷";
     inputted_numbers.push("÷");
@@ -336,6 +343,18 @@ EqualButton.addEventListener("click", (event) => {
             inputted_numbers = inputted_numbers.filter(num => num !== "");
         };
 
+        if (["×", "÷", "+", "-"].includes(inputted_numbers[inputted_numbers.length - 1])) {
+            CalculatorScreen.value = "Syntax Error";
+
+            AllButtons.forEach(button => {
+                if (button !== AcButton){
+                    button.disabled = true;
+                };
+            });
+
+            return;
+        };
+
         let new_inputted_numbers = [];
 
         if (inputted_numbers.length >= 2 && inputted_numbers[0] === "-" && !isNaN(inputted_numbers[1])) {
@@ -361,6 +380,7 @@ EqualButton.addEventListener("click", (event) => {
         expression = "" ;
         expression = answer.toString();
         last_button_was_operator = false;
+        first_button_is_operator = true;
         EqualButton.disabled = true;
     };
 });
