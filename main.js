@@ -325,7 +325,11 @@ const CalculateResults = () => {
     };
     
     answer = parseFloat(inputted_numbers[0]);
-    CalculatorScreen.value = answer.toString();
+    if (answer.toString().length>16) {
+        answer = answer.toString().slice(0, 16);
+    };
+
+    CalculatorScreen.value = answer;
 };
 
 
