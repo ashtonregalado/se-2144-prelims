@@ -195,54 +195,6 @@ const HandleOperatorButtons = (operator) => {
 };
 
 
-const HandleEqualButton = () => {
-    if (inputted_numbers.length === 0) {
-        CalculatorScreen.value = current_input;
-
-    } else {
-
-        if (current_input !== "") {
-            inputted_numbers.push(current_input); 
-        };
-        
-        if (inputted_numbers.includes("")) {
-            inputted_numbers = inputted_numbers.filter(num => num !== "");
-        };
-
-        if (["×", "÷", "+", "-"].includes(inputted_numbers[inputted_numbers.length - 1])) {
-            CalculatorScreen.value = "Syntax Error";
-
-            AllButtons.forEach(button => {
-                if (button !== AcButton){
-                    button.disabled = true;
-                };
-            });
-
-            return;
-        };
-
-        let new_inputted_numbers = [];
-
-        if (inputted_numbers.length >= 2 && inputted_numbers[0] === "-" && !isNaN(inputted_numbers[1])) {
-            inputted_numbers = [inputted_numbers[0] + inputted_numbers[1]].concat(inputted_numbers.slice(2));
-        };
-
-        for (let i = 0; i < inputted_numbers.length; i++) {
-
-            if (i < inputted_numbers.length - 1 && !isNaN(inputted_numbers[i]) && !isNaN(inputted_numbers[i + 1])) {
-                new_inputted_numbers.push(inputted_numbers[i] + inputted_numbers[i + 1]);
-                i++; 
-
-            } else {
-                new_inputted_numbers.push(inputted_numbers[i]);
-            };
-        };
-
-        inputted_numbers = new_inputted_numbers;
-    };
-};
-
-
 const CalculateAnswer = () => {
     let index = 0;
 
@@ -370,7 +322,52 @@ DivideButton.addEventListener("click", (event) => {
 
 
 EqualButton.addEventListener("click", (event) => {
-    HandleEqualButton()
+    if (inputted_numbers.length === 0) {
+        CalculatorScreen.value = current_input;
+
+    } else {
+
+        if (current_input !== "") {
+            inputted_numbers.push(current_input); 
+        };
+        
+        if (inputted_numbers.includes("")) {
+            inputted_numbers = inputted_numbers.filter(num => num !== "");
+        };
+
+        if (["×", "÷", "+", "-"].includes(inputted_numbers[inputted_numbers.length - 1])) {
+            CalculatorScreen.value = "Syntax Error";
+
+            AllButtons.forEach(button => {
+                if (button !== AcButton){
+                    button.disabled = true;
+                };
+            });
+
+            return;
+        };
+
+        let new_inputted_numbers = [];
+
+        if (inputted_numbers.length >= 2 && inputted_numbers[0] === "-" && !isNaN(inputted_numbers[1])) {
+            inputted_numbers = [inputted_numbers[0] + inputted_numbers[1]].concat(inputted_numbers.slice(2));
+        };
+
+        for (let i = 0; i < inputted_numbers.length; i++) {
+
+            if (i < inputted_numbers.length - 1 && !isNaN(inputted_numbers[i]) && !isNaN(inputted_numbers[i + 1])) {
+                new_inputted_numbers.push(inputted_numbers[i] + inputted_numbers[i + 1]);
+                i++; 
+
+            } else {
+                new_inputted_numbers.push(inputted_numbers[i]);
+            };
+        };
+
+        inputted_numbers = new_inputted_numbers;
+    };
+
+
     CalculateAnswer();
 
     current_input = "" ;
