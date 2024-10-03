@@ -84,12 +84,6 @@ const HandleByeButton = () => {
 
 
 const HandleDeleteButton = () => {
-    const lastChar = expression.slice(-1); 
-
-    if (["+", "-", "×", "÷"].includes(lastChar)) {
-        last_button_was_operator = false; 
-    };
-
     current_input = current_input.slice(0, -1); 
     expression = expression.slice(0, -1);       
 
@@ -111,6 +105,15 @@ const HandleDeleteButton = () => {
     } else {
         first_button_is_operator = true;
     };
+
+    const lastChar = expression.slice(-1); 
+    
+    if (["+", "-", "×", "÷"].includes(lastChar)) {
+        last_button_was_operator = true; 
+    } else {
+        last_button_was_operator = false;
+    }
+
 };
 
 
